@@ -1,0 +1,402 @@
+{
+  "name": "INTEGRAÇÃO CAL.COM",
+  "nodes": [
+    {
+      "parameters": {
+        "events": [
+          "BOOKING_CREATED"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.calTrigger",
+      "typeVersion": 3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "56b6445f-d450-4870-a376-4a84c401e8fd",
+      "name": "Cal.com Trigger",
+      "webhookId": "0d48534a-e7fb-4fce-bd32-7e78a9147d36",
+      "credentials": {
+        "calApi": {
+          "id": "pxxmYKYFLupxxCQK",
+          "name": "Cal account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "LISTA DE LEADS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Nome": "={{ $json.organizer.name }}",
+            "Telefone": "={{ $json.attendees[0].phoneNumber }}",
+            "E-mail": "={{ $json.attendees[0].email }}",
+            "Data do último Atendimento": "={{ $json.startTime }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Telefone",
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Data do último Atendimento",
+              "displayName": "Data do último Atendimento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Recência",
+              "displayName": "Recência",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Frequência",
+              "displayName": "Frequência",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Valor Monetário",
+              "displayName": "Valor Monetário",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        144
+      ],
+      "id": "0b320bfa-c447-434d-bccf-14d3f9c2a27a",
+      "name": "GUARDA LEAD NA TABELA",
+      "credentials": {
+        "googleApi": {
+          "id": "nbuh8xwsjYZ4mXEv",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "d3c88199-4274-44f1-a4d5-a3124c25f868",
+              "leftValue": "={{ $json.row_number }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        448,
+        0
+      ],
+      "id": "21079c95-d71c-4f26-89d2-a439d483eaf8",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "LISTA DE LEADS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Telefone",
+              "lookupValue": "={{ $json.attendees[0].phoneNumber }}"
+            },
+            {
+              "lookupColumn": "E-mail",
+              "lookupValue": "={{ $json.attendees[0].email }}"
+            }
+          ]
+        },
+        "combineFilters": "OR",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "9e304ae6-3072-4658-a868-fedacf1c6573",
+      "name": "VÊ SE LEAD JÁ EXISTE",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleApi": {
+          "id": "nbuh8xwsjYZ4mXEv",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "LISTA DE LEADS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Data do último Atendimento": "={{ $('Cal.com Trigger').first().json.startTime }}"
+          },
+          "matchingColumns": [
+            "Data do último Atendimento"
+          ],
+          "schema": [
+            {
+              "id": "Nome",
+              "displayName": "Nome",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Telefone",
+              "displayName": "Telefone",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "E-mail",
+              "displayName": "E-mail",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Data do último Atendimento",
+              "displayName": "Data do último Atendimento",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Recência",
+              "displayName": "Recência",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Frequência",
+              "displayName": "Frequência",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Valor Monetário",
+              "displayName": "Valor Monetário",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        672,
+        -96
+      ],
+      "id": "7cff1cca-db32-455f-b7b0-77bb516fd4d3",
+      "name": "ATUALIZA LEAD",
+      "credentials": {
+        "googleApi": {
+          "id": "nbuh8xwsjYZ4mXEv",
+          "name": "Google Service Account account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Cal.com Trigger": {
+      "main": [
+        [
+          {
+            "node": "VÊ SE LEAD JÁ EXISTE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "ATUALIZA LEAD",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GUARDA LEAD NA TABELA",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VÊ SE LEAD JÁ EXISTE": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "c4a14b4d-de9c-4f11-8b81-7bbd8345f521",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b21ec1ccba70377765982d0ae2633d9788bb4d689b4d65bc9caedc023b14c823"
+  },
+  "nodeGroups": [],
+  "id": "QigL3oGUStUJd9fE",
+  "tags": []
+}

@@ -1,0 +1,273 @@
+{
+  "name": "FOLLOW-UP AUTOMÁTICOS",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "months",
+              "triggerAtDayOfMonth": 7,
+              "triggerAtHour": 12
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "90006fef-cb39-4874-95a7-67f8932d737a",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json['Classificação'] }}",
+                    "rightValue": "Irregular",
+                    "operator": {
+                      "type": "string",
+                      "operation": "notStartsWith"
+                    },
+                    "id": "5f15baa8-c8c9-480a-8df7-39198858b3cc"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Irregular"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "6e3b44bf-b1fa-4816-a2c7-bccb3e87cd88",
+                    "leftValue": "={{ $json['Classificação'] }}",
+                    "rightValue": "Sumida",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Sumida"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 4
+                },
+                "conditions": [
+                  {
+                    "id": "4c0b719e-f337-4d17-ac51-2b4f13393dbd",
+                    "leftValue": "={{ $json['Classificação'] }}",
+                    "rightValue": "Não Pagante",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Não Pagante"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.5,
+      "position": [
+        448,
+        -16
+      ],
+      "id": "345c82f4-251f-4366-9284-0b6679a8fc03",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit?usp=sharing",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "LISTA DE LEADS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        0
+      ],
+      "id": "51979f4f-fa01-4b11-9604-c71e3bd3549d",
+      "name": "busca leads",
+      "credentials": {
+        "googleApi": {
+          "id": "nbuh8xwsjYZ4mXEv",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        736,
+        -208
+      ],
+      "id": "b6160201-20aa-4f00-b04c-0e3ce3c24791",
+      "name": "Envia link de agendamento",
+      "webhookId": "1dee5afe-5aaa-49ad-a684-2dd67c4040d1",
+      "credentials": {
+        "smtp": {
+          "id": "jiz6OmPYoeOqhPC7",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        752,
+        -16
+      ],
+      "id": "65922112-35a5-4ce6-b662-3158aaee9004",
+      "name": "Envia E-mail MKT com promoção",
+      "webhookId": "1dee5afe-5aaa-49ad-a684-2dd67c4040d1",
+      "credentials": {
+        "smtp": {
+          "id": "jiz6OmPYoeOqhPC7",
+          "name": "SMTP account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        752,
+        160
+      ],
+      "id": "f8a0a342-fa3d-4ce7-b871-f3f463321f7d",
+      "name": "Envia Cupom de Desconto",
+      "webhookId": "1dee5afe-5aaa-49ad-a684-2dd67c4040d1",
+      "credentials": {
+        "smtp": {
+          "id": "jiz6OmPYoeOqhPC7",
+          "name": "SMTP account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "busca leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "busca leads": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Envia link de agendamento",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Envia E-mail MKT com promoção",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Envia Cupom de Desconto",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "9ff877c6-e57e-4775-a52b-7e610997807f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b21ec1ccba70377765982d0ae2633d9788bb4d689b4d65bc9caedc023b14c823"
+  },
+  "nodeGroups": [],
+  "id": "u1J0uLcwNyxrEIuz",
+  "tags": []
+}
