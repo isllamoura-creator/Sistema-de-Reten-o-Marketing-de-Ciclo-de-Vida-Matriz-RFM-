@@ -16,10 +16,10 @@
       ],
       "id": "56b6445f-d450-4870-a376-4a84c401e8fd",
       "name": "Cal.com Trigger",
-      "webhookId": "0d48534a-e7fb-4fce-bd32-7e78a9147d36",
+      "webhookId": "SEU_WEBHOOK_ID_AQUI",
       "credentials": {
         "calApi": {
-          "id": "pxxmYKYFLupxxCQK",
+          "id": "SEU_CAL_API_ID",
           "name": "Cal account"
         }
       }
@@ -30,7 +30,7 @@
         "operation": "append",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit?usp=sharing",
+          "value": "https://docs.google.com/spreadsheets/d/SEU_ID_DA_PLANILHA_AQUI/edit",
           "mode": "url"
         },
         "sheetName": {
@@ -38,7 +38,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "LISTA DE LEADS",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_ID_DA_PLANILHA_AQUI/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -129,7 +129,7 @@
       "name": "GUARDA LEAD NA TABELA",
       "credentials": {
         "googleApi": {
-          "id": "nbuh8xwsjYZ4mXEv",
+          "id": "SEU_GOOGLE_API_ID",
           "name": "Google Service Account account"
         }
       }
@@ -173,7 +173,7 @@
         "authentication": "serviceAccount",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit?usp=sharing",
+          "value": "https://docs.google.com/spreadsheets/d/SEU_ID_DA_PLANILHA_AQUI/edit",
           "mode": "url"
         },
         "sheetName": {
@@ -181,7 +181,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "LISTA DE LEADS",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_ID_DA_PLANILHA_AQUI/edit#gid=0"
         },
         "filtersUI": {
           "values": [
@@ -209,7 +209,7 @@
       "alwaysOutputData": true,
       "credentials": {
         "googleApi": {
-          "id": "nbuh8xwsjYZ4mXEv",
+          "id": "SEU_GOOGLE_API_ID",
           "name": "Google Service Account account"
         }
       }
@@ -220,7 +220,7 @@
         "operation": "update",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit?usp=sharing",
+          "value": "https://docs.google.com/spreadsheets/d/SEU_ID_DA_PLANILHA_AQUI/edit",
           "mode": "url"
         },
         "sheetName": {
@@ -228,7 +228,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "LISTA DE LEADS",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_ID_DA_PLANILHA_AQUI/edit#gid=0"
         },
         "columns": {
           "mappingMode": "defineBelow",
@@ -336,7 +336,7 @@
       "name": "ATUALIZA LEAD",
       "credentials": {
         "googleApi": {
-          "id": "nbuh8xwsjYZ4mXEv",
+          "id": "SEU_GOOGLE_API_ID",
           "name": "Google Service Account account"
         }
       }
@@ -388,15 +388,6 @@
   "active": true,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": true
-  },
-  "versionId": "c4a14b4d-de9c-4f11-8b81-7bbd8345f521",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "b21ec1ccba70377765982d0ae2633d9788bb4d689b4d65bc9caedc023b14c823"
-  },
-  "nodeGroups": [],
-  "id": "QigL3oGUStUJd9fE",
-  "tags": []
+    "binaryMode": "separate"
+  }
 }
