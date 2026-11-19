@@ -36,13 +36,14 @@
                 },
                 "conditions": [
                   {
+                    "id": "5f15baa8-c8c9-480a-8df7-39198858b3cc",
                     "leftValue": "={{ $json['Classificação'] }}",
                     "rightValue": "Irregular",
                     "operator": {
                       "type": "string",
-                      "operation": "notStartsWith"
-                    },
-                    "id": "5f15baa8-c8c9-480a-8df7-39198858b3cc"
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
                   }
                 ],
                 "combinator": "and"
@@ -118,7 +119,7 @@
         "authentication": "serviceAccount",
         "documentId": {
           "__rl": true,
-          "value": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit?usp=sharing",
+          "value": "https://docs.google.com/spreadsheets/d/SEU_ID_DA_PLANILHA_AQUI/edit",
           "mode": "url"
         },
         "sheetName": {
@@ -126,7 +127,7 @@
           "value": "gid=0",
           "mode": "list",
           "cachedResultName": "LISTA DE LEADS",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1CDUkg_UmjKILOTtM6dH9CWwkeKP0X8CC8VE8FuY8PME/edit#gid=0"
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/SEU_ID_DA_PLANILHA_AQUI/edit#gid=0"
         },
         "options": {}
       },
@@ -140,7 +141,7 @@
       "name": "busca leads",
       "credentials": {
         "googleApi": {
-          "id": "nbuh8xwsjYZ4mXEv",
+          "id": "SEU_GOOGLE_API_ID",
           "name": "Google Service Account account"
         }
       }
@@ -157,10 +158,10 @@
       ],
       "id": "b6160201-20aa-4f00-b04c-0e3ce3c24791",
       "name": "Envia link de agendamento",
-      "webhookId": "1dee5afe-5aaa-49ad-a684-2dd67c4040d1",
+      "webhookId": "SEU_WEBHOOK_ID_AQUI",
       "credentials": {
         "smtp": {
-          "id": "jiz6OmPYoeOqhPC7",
+          "id": "SEU_SMTP_ID",
           "name": "SMTP account"
         }
       }
@@ -177,10 +178,10 @@
       ],
       "id": "65922112-35a5-4ce6-b662-3158aaee9004",
       "name": "Envia E-mail MKT com promoção",
-      "webhookId": "1dee5afe-5aaa-49ad-a684-2dd67c4040d1",
+      "webhookId": "SEU_WEBHOOK_ID_AQUI",
       "credentials": {
         "smtp": {
-          "id": "jiz6OmPYoeOqhPC7",
+          "id": "SEU_SMTP_ID",
           "name": "SMTP account"
         }
       }
@@ -197,10 +198,10 @@
       ],
       "id": "f8a0a342-fa3d-4ce7-b871-f3f463321f7d",
       "name": "Envia Cupom de Desconto",
-      "webhookId": "1dee5afe-5aaa-49ad-a684-2dd67c4040d1",
+      "webhookId": "SEU_WEBHOOK_ID_AQUI",
       "credentials": {
         "smtp": {
-          "id": "jiz6OmPYoeOqhPC7",
+          "id": "SEU_SMTP_ID",
           "name": "SMTP account"
         }
       }
@@ -259,15 +260,6 @@
   "active": false,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate",
-    "availableInMCP": true
-  },
-  "versionId": "9ff877c6-e57e-4775-a52b-7e610997807f",
-  "meta": {
-    "templateCredsSetupCompleted": true,
-    "instanceId": "b21ec1ccba70377765982d0ae2633d9788bb4d689b4d65bc9caedc023b14c823"
-  },
-  "nodeGroups": [],
-  "id": "u1J0uLcwNyxrEIuz",
-  "tags": []
+    "binaryMode": "separate"
+  }
 }
